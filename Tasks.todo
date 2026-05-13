@@ -107,6 +107,6 @@
         ✔ Dashboard() @done(26-05-13 12:33)
 
 [] Updating Routes.php
-    ☐ Routes for EmployeController
-    ☐ Routes for ResponsableRHController
-    ☐ Routes for AdminController 
+    ✔ Routes for EmployeController @done(26-05-13 12:39)
+    ✔ Routes for ResponsableRHController @done(26-05-13 12:41)
+    ✔ Routes for AdminController @done(26-05-13 12:50)
