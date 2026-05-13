@@ -2,33 +2,35 @@
 
 <?= $this->section('content') ?>
 
-<section id="page-liste-rh" style="margin-top:3rem">
+<section id="page-admin-demandes" style="margin-top:3rem">
 <div class="app-wrap">
 
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="sidebar-logo-icon"><i class="bi bi-person-check"></i></div>
-      <div class="sidebar-brand-name">TechMada RH<span>Espace responsable</span></div>
+      <div class="sidebar-logo-icon" style="background:var(--ink);border:1px solid rgba(255,255,255,.15)"><i class="bi bi-shield-check" style="color:var(--leaf)"></i></div>
+      <div class="sidebar-brand-name">TechMada RH<span>Administration</span></div>
     </div>
-    <div class="sidebar-section">Menu</div>
+    <div class="sidebar-section">Gestion</div>
     <ul class="sidebar-nav">
-      <li><a href="<?= site_url('rh') ?>"><i class="bi bi-grid-1x2"></i> Tableau de bord</a></li>
+      <li><a href="<?= site_url('admin') ?>"><i class="bi bi-speedometer2"></i> Vue d'ensemble</a></li>
       <li>
-        <a href="<?= site_url('rh') ?>" class="active">
-          <i class="bi bi-inbox"></i> Demandes à traiter
+        <a href="<?= site_url('admin/demandes') ?>" class="active">
+          <i class="bi bi-inbox"></i> Toutes les demandes
           <?php if (!empty($stats['en_attente'])) : ?>
           <span class="nav-badge alert"><?= (int) $stats['en_attente'] ?></span>
           <?php endif; ?>
         </a>
       </li>
-      <li><a href="<?= site_url('rh') ?>"><i class="bi bi-archive"></i> Historique</a></li>
-      <li><a href="<?= site_url('rh/soldes') ?>"><i class="bi bi-people"></i> Soldes employes</a></li>
-      <li><a href="#page-profil-rh"><i class="bi bi-person"></i> Mon profil</a></li>
+      <li><a href="<?= site_url('admin/employes') ?>"><i class="bi bi-people"></i> Employes</a></li>
+      <li><a href="<?= site_url('admin/departements') ?>"><i class="bi bi-building"></i> Departements</a></li>
+      <li><a href="<?= site_url('admin/types-conge') ?>"><i class="bi bi-tags"></i> Types de conge</a></li>
+      <li><a href="<?= site_url('admin/soldes') ?>"><i class="bi bi-sliders"></i> Soldes annuels</a></li>
+      <li><a href="#page-profil-admin"><i class="bi bi-person"></i> Mon profil</a></li>
     </ul>
     <div class="sidebar-user">
       <div class="s-user-row">
-        <div class="avatar av-blue">RH</div>
-        <div><div class="user-name"><?= esc($currentUser['prenom'] . ' ' . $currentUser['nom']) ?></div><div class="user-role">Responsable RH</div></div>
+        <div class="avatar" style="background:#5a2d82;width:32px;height:32px;font-size:.7rem">AD</div>
+        <div><div class="user-name"><?= esc($currentUser['prenom'] . ' ' . $currentUser['nom']) ?></div><div class="user-role">Admin systeme</div></div>
         <a href="<?= site_url('logout') ?>" style="margin-left:auto;color:rgba(255,255,255,.25);font-size:1.1rem"><i class="bi bi-box-arrow-right"></i></a>
       </div>
     </div>
@@ -38,7 +40,7 @@
     <div class="topbar">
       <div>
         <div class="topbar-title">Demandes a traiter</div>
-        <div class="topbar-breadcrumb"><a href="<?= site_url('rh') ?>">Accueil</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Demandes</div>
+        <div class="topbar-breadcrumb"><a href="<?= site_url('admin') ?>">Administration</a> <i class="bi bi-chevron-right" style="font-size:.6rem"></i> Demandes</div>
       </div>
       <div class="topbar-actions">
         <span style="font-size:.8rem;color:var(--muted);background:var(--warn-bg);border:1px solid var(--warn-br);border-radius:6px;padding:5px 10px;display:flex;align-items:center;gap:5px;color:var(--warn)">
@@ -49,7 +51,6 @@
 
     <div class="content">
 
-      <!-- Flash -->
       <?php if (!empty($success)) : ?>
       <div class="flash flash-success">
         <i class="bi bi-check-circle-fill"></i>
@@ -57,18 +58,17 @@
       </div>
       <?php endif; ?>
 
-      <!-- Filtre -->
       <?php
-        $rhBaseUrl = site_url('rh');
-        $rhUrlAttente = $rhBaseUrl . '?' . http_build_query(['statut' => 'en attente']);
-        $rhUrlApprouvee = $rhBaseUrl . '?' . http_build_query(['statut' => 'approuvee']);
-        $rhUrlRefusee = $rhBaseUrl . '?' . http_build_query(['statut' => 'refusee']);
+        $adminBaseUrl = site_url('admin/demandes');
+        $adminUrlAttente = $adminBaseUrl . '?' . http_build_query(['statut' => 'en attente']);
+        $adminUrlApprouvee = $adminBaseUrl . '?' . http_build_query(['statut' => 'approuvee']);
+        $adminUrlRefusee = $adminBaseUrl . '?' . http_build_query(['statut' => 'refusee']);
       ?>
       <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap">
-        <a href="<?= $rhBaseUrl ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--forest);background:var(--forest);color:var(--white);cursor:pointer;text-decoration:none">Tous (<?= (int) ($stats['total'] ?? 0) ?>)</a>
-        <a href="<?= $rhUrlAttente ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">En attente (<?= (int) ($stats['en_attente'] ?? 0) ?>)</a>
-        <a href="<?= $rhUrlApprouvee ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">Approuvees (<?= (int) ($stats['approuvee'] ?? 0) ?>)</a>
-        <a href="<?= $rhUrlRefusee ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">Refusees (<?= (int) ($stats['refusee'] ?? 0) ?>)</a>
+        <a href="<?= $adminBaseUrl ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--forest);background:var(--forest);color:var(--white);cursor:pointer;text-decoration:none">Tous (<?= (int) ($stats['total'] ?? 0) ?>)</a>
+        <a href="<?= $adminUrlAttente ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">En attente (<?= (int) ($stats['en_attente'] ?? 0) ?>)</a>
+        <a href="<?= $adminUrlApprouvee ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">Approuvees (<?= (int) ($stats['approuvee'] ?? 0) ?>)</a>
+        <a href="<?= $adminUrlRefusee ?>" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;text-decoration:none">Refusees (<?= (int) ($stats['refusee'] ?? 0) ?>)</a>
         <form method="get" style="margin-left:auto">
           <?php if (!empty($filters['statut'])) : ?>
             <input type="hidden" name="statut" value="<?= esc($filters['statut']) ?>"/>
@@ -88,7 +88,7 @@
         <div class="data-card-head"><h3>Toutes les demandes</h3></div>
         <table class="tbl">
           <thead>
-            <tr><th>Employé</th><th>Type</th><th>Période</th><th>Durée</th><th>Solde dispo</th><th>Statut</th><th>Actions</th></tr>
+            <tr><th>Employe</th><th>Type</th><th>Periode</th><th>Duree</th><th>Solde dispo</th><th>Statut</th><th>Actions</th></tr>
           </thead>
           <tbody>
             <?php if (!empty($demandes)) : ?>
@@ -126,12 +126,12 @@
                   <td>
                     <?php if ($demande['statut'] === 'en attente') : ?>
                       <div class="action-btns">
-                        <form method="post" action="<?= site_url('rh/demandes/' . $demande['id'] . '/approve') ?>">
+                        <form method="post" action="<?= site_url('admin/demandes/' . $demande['id'] . '/approve') ?>">
                           <?= csrf_field() ?>
                           <input type="text" name="commentaire_rh" class="f-input" placeholder="Commentaire (optionnel)" style="font-size:.72rem;padding:4px 6px;width:160px" />
                           <button class="btn-sm btn-approve" type="submit"><i class="bi bi-check-lg"></i> Approuver</button>
                         </form>
-                        <form method="post" action="<?= site_url('rh/demandes/' . $demande['id'] . '/refuse') ?>">
+                        <form method="post" action="<?= site_url('admin/demandes/' . $demande['id'] . '/refuse') ?>">
                           <?= csrf_field() ?>
                           <input type="text" name="commentaire_rh" class="f-input" placeholder="Commentaire (optionnel)" style="font-size:.72rem;padding:4px 6px;width:160px" />
                           <button class="btn-sm btn-refuse" type="submit"><i class="bi bi-x-lg"></i> Refuser</button>
@@ -150,7 +150,7 @@
         </table>
       </div>
 
-      <div id="page-profil-rh" class="data-card" style="margin-top:1.5rem">
+      <div id="page-profil-admin" class="data-card" style="margin-top:1.5rem">
         <div class="data-card-head"><h3>Mon profil</h3></div>
         <div style="padding:1rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem">
           <div>
@@ -163,7 +163,7 @@
           </div>
           <div>
             <div class="td-muted" style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Role</div>
-            <div class="td-name" style="font-size:.95rem"><?= esc($currentUser['role'] ?? 'rh') ?></div>
+            <div class="td-name" style="font-size:.95rem"><?= esc($currentUser['role'] ?? 'admin') ?></div>
           </div>
           <div>
             <div class="td-muted" style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em">Identifiant</div>
