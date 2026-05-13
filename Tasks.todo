@@ -46,58 +46,67 @@
 
     ✔ INSERT DATA @IA help @done(26-05-13 11:47)
 
-[] CREATE All TableModel
+[x] CREATE All TableModel
     ✔  EmployeModel @done(26-05-13 11:09)
        - Attributes: (from conge_employes table)
        - Functions
          ✔ findActifs() @done(26-05-13 11:11)
          ✔ findByEmail($email) @done(26-05-13 11:11)
          ✔ findByDepartement($departement_Id) @done(26-05-13 11:11)
-    ☐  DepartementModel
+    ✔  DepartementModel @done(26-05-13 12:14)
        - Attributes: (from conge_departements table)
        - Functions
-            ☐ findAllSorted() // All Departements sorted by name
-            ☐ findWithEmployes() // Departement avec Employes  
-    ☐  TypeCongeModel
+            ✔ findAllSorted() // All Departements sorted by name @done(26-05-13 12:14)
+            ✔ findWithEmployes() // Departement avec Employes @done(26-05-13 12:14)
+    ✔  TypeCongeModel @done(26-05-13 12:14)
        - Attributes: (from conge_types_conge table)
        - Functions
-            ☐ findDeductibles() 
-            ☐ findAllSorted() 
-    ☐  SoldeCongeModel
+            ✔ findDeductibles() @done(26-05-13 12:14)
+            ✔ findAllSorted() @done(26-05-13 12:14)
+    ✔  SoldeCongeModel @done(26-05-13 12:14)
        - Attributes: (from conge_solde table)
        - Functions
-            ☐ calculerRestant($solde) 
-            ☐ findSolde($employeId, $typeCongeId, $annee) 
-            ☐ findByEmploye($employeId, $annee) 
-            ☐ deduire($employeId, $typeCongeId, $annee, $nbJours) 
-            ☐ recrediter($employeId, $typeCongeId, $annee, $nbJours) 
-            ☐ estSuffisant($employeId, $typeCongeId, $annee, $nbJours) 
-    ☐  CongeModel
+            ✔ calculerRestant($solde) @done(26-05-13 12:14)
+            ✔ findSolde($employeId, $typeCongeId, $annee) @done(26-05-13 12:14)
+            ✔ findByEmploye($employeId, $annee) @done(26-05-13 12:14)
+            ✔ deduire($employeId, $typeCongeId, $annee, $nbJours) @done(26-05-13 12:14)
+            ✔ recrediter($employeId, $typeCongeId, $annee, $nbJours) @done(26-05-13 12:14)
+            ✔ estSuffisant($employeId, $typeCongeId, $annee, $nbJours) @done(26-05-13 12:14)
+    ✔  CongeModel @done(26-05-13 12:14)
        - Attributes: (from conge_conges table)
        - Functions:
-            ☐ setDefaultStatus()
-            ☐ SetCr 
-            ☐ findByEmploye($employeId) 
-            ☐ findEnAttente() 
-            ☐ findFiltrees($statut, $departementId) 
-            ☐ findAbsencesMoisCourant() 
-            ☐ aChevauchement($employeId, $dateDebut, $dateFin, $excludeId = null) 
-            ☐ approuver($congeId, $rhId, $commentaire) 
-            ☐ refuser($congeId, $rhId, $commentaire) 
-            ☐ annuler($congeId)
+            ✔ findByEmploye($employeId) @done(26-05-13 12:14)
+            ✔ findEnAttente() @done(26-05-13 12:15)
+            ✔ findFiltrees($statut, $departementId) @done(26-05-13 12:15)
+            ✔ findAbsencesMoisCourant() @done(26-05-13 12:15)
+            ✔ aChevauchement($employeId, $dateDebut, $dateFin, $excludeId = null) @done(26-05-13 12:15)
+            ✔ approuver($congeId, $rhId, $commentaire) @done(26-05-13 12:15)
+            ✔ refuser($congeId, $rhId, $commentaire) @done(26-05-13 12:15)
+            ✔ annuler($congeId) @done(26-05-13 12:15)
 
-[] CREATE Controllers
-    ☐  EmployeController
-        ☐ Login()
-        ☐ Logout()
-        ☐ SoumettreDemande()
-        ☐ ConsulterDemandes()
-        ☐ getSoldeConge()
-        ☐ CancelDemande()
-        ☐ EditProfil()
-    ☐  DepartementController
-    ☐  TypeCongeController
-    ☐  SoldeController
-    ☐  CongeController
- 
-[] 
+[] CREATE Controllers @started(26-05-13 12:21)
+    ✔  EmployeController @started(26-05-13 12:21) @done(26-05-13 12:25) @lasted(4m41s)
+        ✔ Login() @done(26-05-13 12:21)
+        ✔ Logout() @done(26-05-13 12:24)
+        ✔ SoumettreDemande() @done(26-05-13 12:25)
+        ✔ ConsulterDemandes() @done(26-05-13 12:25)
+        ✔ getSoldeConge() @done(26-05-13 12:25)
+        ✔ CancelDemande() @done(26-05-13 12:25)
+        ✔ EditProfil() @done(26-05-13 12:25)
+    ✔ ResponsableRHController @done(26-05-13 12:31)
+        ✔ ConsulterDemandes() @done(26-05-13 12:30)
+        ✔ ApprouverDemande() @done(26-05-13 12:30)
+        ✔ RefuserDemande() @done(26-05-13 12:30)
+        ✔ UpdateSoldeConge() @done(26-05-13 12:30)
+        ✔ FiltreDemande() // Departement & statut @done(26-05-13 12:30)
+        ✔ getSoldeEmploye() @done(26-05-13 12:30)
+    ✔ AdminController @done(26-05-13 12:34)
+        ✔ CRUD Employe [create(), read(), update(), delete(), deactivate()] @done(26-05-13 12:33)
+        ✔ CRUD Departement (same as Employe) @done(26-05-13 12:33)
+        ✔ CRUD TypeConge (same as Employe) @done(26-05-13 12:33)
+        ✔ Dashboard() @done(26-05-13 12:33)
+
+[] Updating Routes.php
+    ☐ Routes for EmployeController
+    ☐ Routes for ResponsableRHController
+    ☐ Routes for AdminController 
