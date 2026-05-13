@@ -1,0 +1,58 @@
+                        CONGE_SYSTEM:
+[] CREATION DATABASE: @started(26-05-13 10:03)
+    ☐ CREATE TABLE conge_employes
+        - id
+        - nom
+        - prenom
+        - email
+        - password
+        - departement_id 
+        - date_embauche
+        - actif (boolean)                       
+
+    ☐ CREATE TABLE conge_departements
+        - id
+        - nom
+        - description
+
+    ☐ CREATE TABLE conge_types_conge
+        - id
+        - libelle
+        - jour_annuels
+        - deductible (boolean)
+
+    ☐ CREATE TABLE conge_solde
+        - id
+        - employe_id 
+        - type_conge_id 
+        - annee
+        - jour_attribues
+        - jour_pris
+
+    ☐ CREATE TABLE conge_conges
+        - id
+        - employe_id 
+        - type_conge_id 
+        - date_debut
+        - date_fin
+        - nb_jours
+        - motif
+        - statut (en_attente, approuve, refuse, annule)
+        - commentaire_rh
+        - created_at
+        - traite_par (FK vers conge_employes.id)
+
+[] CREATE All TableModel
+    ☐  EmployeModel
+    ☐  DepartementModel
+    ☐  TypeCongeModel
+    ☐  SoldeModel
+    ☐  CongeModel
+
+[] CREATE Controllers
+    ☐  EmployeController
+    ☐  DepartementController
+    ☐  TypeCongeController
+    ☐  SoldeController
+    ☐  CongeController
+
