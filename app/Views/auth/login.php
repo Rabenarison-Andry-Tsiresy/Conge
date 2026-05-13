@@ -37,20 +37,22 @@
     <p class="auth-title">Connexion</p>
     <p class="auth-sub">Entrez vos identifiants pour accéder à votre espace.</p>
 
-    <!-- Flashdata CI4 — erreur -->
+    <?php if (!empty($error)) : ?>
     <div class="flash flash-error">
       <i class="bi bi-exclamation-circle-fill"></i>
-      Identifiants incorrects. Veuillez réessayer.
+      <?= esc($error) ?>
     </div>
+    <?php endif; ?>
 
-    <form>
+    <form method="post" action="<?= site_url('login') ?>">
+      <?= csrf_field() ?>
       <div class="f-group">
         <label class="f-label">Adresse email</label>
-        <input type="email" class="f-input" placeholder="vous@techmada.mg" value="employe@techmada.mg"/>
+        <input type="email" name="email" class="f-input" placeholder="vous@techmada.mg" value="<?= esc($email ?? '') ?>"/>
       </div>
       <div class="f-group">
         <label class="f-label">Mot de passe</label>
-        <input type="password" class="f-input" placeholder="••••••••" value="emp123"/>
+        <input type="password" name="password" class="f-input" placeholder="••••••••"/>
       </div>
       <button type="submit" class="btn-primary" style="margin-top:.5rem">
         Se connecter <i class="bi bi-arrow-right-short"></i>
